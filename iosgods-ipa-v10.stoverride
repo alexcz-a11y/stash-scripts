@@ -1,0 +1,20 @@
+name: "iOSGods IPA 直链抓取 v10"
+desc: "抓取 iOSGods 下载跳转后的 downloads.iosgods.com 直链"
+
+http:
+  mitm:
+    - app.iosgods.com
+  script:
+    - match: ^https://app\.iosgods\.com/store/download-ipa/
+      name: iosgods-ipa-v10
+      type: response
+      timeout: 30
+    - match: ^https://downloads\.iosgods\.com/.+\.ipa
+      name: iosgods-ipa-v10
+      type: request
+      timeout: 30
+
+script-providers:
+  iosgods-ipa-v10:
+    url: https://raw.githubusercontent.com/alexcz-a11y/stash-scripts/main/iosgods-ipa-v10.js
+    interval: 86400
