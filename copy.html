@@ -4,7 +4,8 @@
 <button id="c">复制链接</button><button id="o" style="background:#444">直接打开下载</button><div id="m"></div>
 <script>
 var h=location.hash.slice(1),u;
-if(h.indexOf('b=')===0){var b=h.slice(2).replace(/-/g,'+').replace(/_/g,'/');while(b.length%4)b+='=';u=decodeURIComponent(escape(atob(b)))}else{u=decodeURIComponent(h)}
+var pm=h.match(/^p=([^&]+)&v=(.+)$/);
+if(pm){u='https://downloads.iosgods.com'+pm[1]+'?hmacmessage='+encodeURIComponent(pm[1])+'%3Fverify%3D'+pm[2]}else if(h.indexOf('b=')===0){var b=h.slice(2).replace(/-/g,'+').replace(/_/g,'/');while(b.length%4)b+='=';u=decodeURIComponent(escape(atob(b)))}else{u=decodeURIComponent(h)}
 var t=document.getElementById('t'),m=document.getElementById('m');t.value=u;m.textContent='长度 '+u.length+'，'+(/\.ipa$/i.test(u)?'末尾完整':'注意：末尾不是 .ipa，可能被截断');
 function cp(){t.focus();t.select();t.setSelectionRange(0,99999);var ok=false;
 try{ok=document.execCommand('copy')}catch(e){}
