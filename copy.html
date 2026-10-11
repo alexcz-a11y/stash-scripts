@@ -1,0 +1,14 @@
+<!doctype html><html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>复制 IPA 链接</title>
+<style>body{font-family:-apple-system,sans-serif;padding:20px;background:#111;color:#eee}button{width:100%;padding:18px;font-size:20px;border:0;border-radius:12px;background:#0a84ff;color:#fff;margin:12px 0}textarea{width:100%;height:180px;font-size:13px;background:#222;color:#ddd;border:0;border-radius:8px;padding:8px;box-sizing:border-box}#m{color:#30d158;min-height:24px}</style></head><body>
+<h3>iOSGods IPA 链接</h3><textarea id="t" readonly></textarea>
+<button id="c">复制链接</button><button id="o" style="background:#444">直接打开下载</button><div id="m"></div>
+<script>
+var u=decodeURIComponent(location.hash.slice(1));
+var t=document.getElementById('t'),m=document.getElementById('m');t.value=u;
+function cp(){t.focus();t.select();t.setSelectionRange(0,99999);var ok=false;
+try{ok=document.execCommand('copy')}catch(e){}
+if(!ok&&navigator.clipboard){navigator.clipboard.writeText(u).then(function(){m.textContent='已复制'},function(){m.textContent='请长按文本框手动复制'});return}
+m.textContent=ok?'已复制':'请长按文本框手动复制'}
+document.getElementById('c').onclick=cp;
+document.getElementById('o').onclick=function(){location.href=u};
+</script></body></html>
