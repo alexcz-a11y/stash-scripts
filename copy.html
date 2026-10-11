@@ -3,12 +3,13 @@
 <h3>iOSGods IPA 链接</h3><textarea id="t" readonly></textarea>
 <button id="c">复制链接</button><button id="o" style="background:#444">直接打开下载</button><div id="m"></div>
 <script>
-var u=decodeURIComponent(location.hash.slice(1));
-var t=document.getElementById('t'),m=document.getElementById('m');t.value=u;
+var h=location.hash.slice(1),u;
+if(h.indexOf('b=')===0){var b=h.slice(2).replace(/-/g,'+').replace(/_/g,'/');while(b.length%4)b+='=';u=decodeURIComponent(escape(atob(b)))}else{u=decodeURIComponent(h)}
+var t=document.getElementById('t'),m=document.getElementById('m');t.value=u;m.textContent='长度 '+u.length+'，'+(/\.ipa$/i.test(u)?'末尾完整':'注意：末尾不是 .ipa，可能被截断');
 function cp(){t.focus();t.select();t.setSelectionRange(0,99999);var ok=false;
 try{ok=document.execCommand('copy')}catch(e){}
-if(!ok&&navigator.clipboard){navigator.clipboard.writeText(u).then(function(){m.textContent='已复制'},function(){m.textContent='请长按文本框手动复制'});return}
-m.textContent=ok?'已复制':'请长按文本框手动复制'}
+if(!ok&&navigator.clipboard){navigator.clipboard.writeText(u).then(function(){m.textContent='已复制，长度 '+u.length},function(){m.textContent='请长按文本框手动复制'});return}
+m.textContent=ok?'已复制，长度 '+u.length:'请长按文本框手动复制'}
 document.getElementById('c').onclick=cp;
 document.getElementById('o').onclick=function(){location.href=u};
 </script></body></html>
